@@ -6,7 +6,7 @@
             "technology": "Services",
             "repositoryURL": "https://git.nh.inet/gitea/telco-micro-python/AAA_Proceso_Cazamasivos.git",
             "sonarWithOSPlugin": false,
-            "deployWithDocker": true,
+            "deployWithDocker": false,
             "mainProjectPath": "",
             "scriptBuildTest":[
                 "mvn install",
