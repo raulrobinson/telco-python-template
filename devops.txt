@@ -5,7 +5,6 @@
             "node": "java-mvn-oc-node1",
             "technology": "Services",
             "repositoryURL": "https://git.nh.inet/gitea/telco-micro-python/AAA_Proceso_Cazamasivos.git",
-            "sonarWithOSPlugin": false,
             "deployWithDocker": false,
             "mainProjectPath": "",
             "scriptBuildTest":[
@@ -17,7 +16,7 @@
             "scriptBuildProd":[
                 ""
             ],                        
-            "sonarWithOSPlugin": false ,
+            "sonarWithOSPlugin": false,
             "sonarEnvironment": "sonarqube-interno",
             "scriptSonar": "mvn sonar:sonar -Dsonar.projectKey=AAA_Proceso_Cazamasivos",
             "scriptTestReportPath": "",
@@ -32,8 +31,7 @@
             "packagePath":"/",
             "packageName": "main"
             },
-            "deployType": "OCP",
-            "deployWithDocker": true,            
+            "deployType": "OCP",           
             "deploy":{
                 "dev":{
                     "hasEnvironment": true,
