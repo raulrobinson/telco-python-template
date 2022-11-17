@@ -13,9 +13,7 @@
                 "mvn deploy"
             ],
             "scriptBuildProd":[
-                "mvn install",
-                "mvn compile",
-                "mvn deploy"
+                ""
             ],                        
             "sonarWithOSPlugin": false,
             "sonarEnvironment": "sonarqube-interno",
@@ -30,7 +28,7 @@
             "packageType": "app",
             "packageExtension": "py",
             "packagePath":"/",
-            "packageName": "main"
+            "packageName": "RadiusSocket"
             },
             "deployType": "OCP",           
             "deploy":{
