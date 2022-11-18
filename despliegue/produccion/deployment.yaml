@@ -43,8 +43,10 @@ objects:
           containers:
             - name: aprodcazamasivos
               env:
-                - name: TZ
-                  value: UTC+5
+                - name: SPRING_APPLICATION_JSON
+                  value: '{"server":{"undertow":{"io-threads":10, "worker-threads":80 }}}'
+                - name: JAVA_OPTIONS
+                  value: -Xms640m -Xmx1024m -Dfile.encoding=ISO-8859-1
               image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
               imagePullPolicy: Always
               resources:
