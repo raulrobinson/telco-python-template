@@ -176,11 +176,12 @@ def create_container(database):
 
 upload = mp.Process(target=upload_data)
 upload.start()
-
+logging.info("escuchando upload")
 time.sleep(2)
 
 upload_2 = mp.Process(target=upload_data)
 upload_2.start()
+logging.info("escuchando upload2")
 
 time.sleep(2)
 
@@ -191,8 +192,9 @@ time.sleep(2)
 
 download = mp.Process(target=download_data)
 download.start()
-
+logging.info("escuchando download")
 time.sleep(7200)
 
 cleaner = mp.Process(target=clean_base)
 cleaner.start()
+logging.info("escuchando clean")
