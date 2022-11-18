@@ -31,6 +31,10 @@ spec:
               cpu: 40m
               memory: 51m
           terminationMessagePath: /dev/termination-log
+          name: aprodcazamasivos
+          env:
+            - name: TZ
+              value: UTC+5
           ports:
             - containerPort: 1887
               protocol: UDP
