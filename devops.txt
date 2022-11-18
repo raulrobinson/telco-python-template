@@ -13,7 +13,8 @@
                 "mvn deploy"
             ],
             "scriptBuildProd":[
-                ""
+                "oc new-app --name balance-management-information --strategy docker ./",
+                "oc start-build balance-management-information  --from-dir ./ --wait=true"
             ],                        
             "sonarWithOSPlugin": false,
             "sonarEnvironment": "sonarqube-interno",
