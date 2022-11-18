@@ -40,11 +40,6 @@ spec:
               protocol: UDP
           imagePullPolicy: Always
           terminationMessagePolicy: File
-          envFrom:
-            - secretRef:
-                name: registry
-            - secretRef:
-                name: aproddevopsrc.azurecr.io
           image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
