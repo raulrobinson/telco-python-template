@@ -5,7 +5,7 @@
             "node": "java-mvn-oc-node1",
             "technology": "Services",
             "repositoryURL": "https://git.nh.inet/gitea/telco-micro-python/AAA_Proceso_Cazamasivos.git",
-            "deployWithDocker": false,
+            "deployWithDocker": true,
             "mainProjectPath": "",
             "scriptBuildTest":[
                 "mvn install",
@@ -13,8 +13,7 @@
                 "mvn deploy"
             ],
             "scriptBuildProd":[
-                "oc new-app --name balance-management-information --strategy docker ./",
-                "oc start-build balance-management-information  --from-dir ./ --wait=true"
+                ""
             ],                        
             "sonarWithOSPlugin": false,
             "sonarEnvironment": "sonarqube-interno",
