@@ -1,89 +1,65 @@
-apiVersion: v1
-kind: Template
+kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: aprodcazamasivos
-  annotations:
-    description: "Template para generacion del servicio de aprodcazamasivos para Telefonica"
-    iconClass: "icon-rh-integration"
-objects:
-  - apiVersion: apps.openshift.io/v1
-    kind: DeploymentConfig
+  namespace: cazamasivos
+  labels:
+    app: aprodcazamasivos
+    app.kubernetes.io/component: aprodcazamasivos
+    app.kubernetes.io/instance: aprodcazamasivos
+    app.kubernetes.io/part-of: aprodcazamasivos-app
+    app.openshift.io/runtime-namespace: cazamasivos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aprodcazamasivos
+  template:
     metadata:
+      creationTimestamp: null
       labels:
-        app: aprodcazamasivos
-        app.kubernetes.io/component: aprodcazamasivos
-        app.kubernetes.io/instance: aprodcazamasivos
-      name: aprodcazamasivos
-      namespace: cazamasivos
-    spec:
-      replicas: 1
-      revisionHistoryLimit: 10
-      selector:
         app: aprodcazamasivos
         deploymentconfig: aprodcazamasivos
-      strategy:
-        activeDeadlineSeconds: 21600
-        resources: { }
-        rollingParams:
-          intervalSeconds: 1
-          maxSurge: 25%
-          maxUnavailable: 25%
-          timeoutSeconds: 600
-          updatePeriodSeconds: 1
-        type: Rolling
-      template:
-        metadata:
-          annotations:
-            openshift.io/generated-by: OpenShiftNewApp
-            sidecar.istio.io/inject: "true"
-          labels:
-            app: aprodcazamasivos
-            deploymentconfig: aprodcazamasivos
-        spec:
-          containers:
-            - name: aprodcazamasivos
-              env:
-                - name: SPRING_APPLICATION_JSON
-                  value: '{"server":{"undertow":{"io-threads":10, "worker-threads":80 }}}'
-                - name: JAVA_OPTIONS
-                  value: -Xms640m -Xmx1024m -Dfile.encoding=ISO-8859-1
-              image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
-              imagePullPolicy: Always
-              envFrom:
-                - configMapRef:
-                    name: aproddevopsrc.azurecr.io
-                - secretRef:
-                    name: registry
-              resources:
-                limits:
-                  cpu: 400m
-                  memory: 1Gi
-                requests:
-                  cpu: 200m
-                  memory: 640Mi
-          dnsPolicy: ClusterFirst
-          restartPolicy: Always
-          schedulerName: default-scheduler
-          securityContext: { }
-          terminationGracePeriodSeconds: 30
-          runAsNonRoot: false
-          hostAliases:
-            - ip: 10.86.6.26
-              hostnames:
-                - aprodcazamasivosdb.documents.azure.com       
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      labels:
-        app: aprodcazamasivos
-        app.kubernetes.io/component: aprodcazamasivos
-        app.kubernetes.io/instance: aprodcazamasivos
-      name: aprodcazamasivos
-      namespace: cazamasivos
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
     spec:
-      ports:
-        - port: 1887
-          protocol: UDP
-      env:
-        - name: TZ
-          value: UTC+5
+      containers:
+        - resources:
+            limits:
+              memory: 4Gi
+            requests:
+              cpu: 40m
+              memory: 51m
+          terminationMessagePath: /dev/termination-log
+          name: aprodcazamasivos
+          env:
+            - name: TZ
+              value: UTC+5
+          ports:
+            - containerPort: 1887
+              protocol: UDP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          envFrom:
+            - secretRef:
+                name: registry
+            - secretRef:
+                name: aproddevopsrc.azurecr.io
+          image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext:
+        runAsNonRoot: false
+      schedulerName: default-scheduler
+      hostAliases:
+        - ip: 10.86.6.26
+          hostnames:
+            - aprodcazamasivosdb.documents.azure.com
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
