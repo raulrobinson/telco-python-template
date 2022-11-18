@@ -5,7 +5,7 @@
             "node": "java-mvn-oc-node1",
             "technology": "Services",
             "repositoryURL": "https://git.nh.inet/gitea/telco-micro-python/AAA_Proceso_Cazamasivos.git",
-            "deployWithDocker": true,
+            "deployWithDocker": false,
             "mainProjectPath": "",
             "scriptBuildTest":[
                 "mvn install",
