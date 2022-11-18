@@ -83,7 +83,8 @@ def download_data():
             data = radiusServerSocket.recv(packet_max)
             with open(os.path.join(path, f'{file_name}.txt'), "wb") as file:
                 file.write(data)
-                logging.info(file+"log cantidades y horas ")
+                logging.info("log cantidades y horas/n ")
+                logging.info(file)
         except:
             radiusServerSocket.close()
             close_connection = True
@@ -107,7 +108,8 @@ def upload_data():
                     code, id, length, authenticator = struct.unpack('!BBH16s', data[:20])
                     pos, attrs = 0, {}
                     data_2 = data[20:length]
-                    logging.info("variable data2",data_2)
+                    logging.info("variable data2/n")
+                    logging.info(data_2)
                     while pos < len(data_2):
                         code, length = struct.unpack('BB', data_2[pos:pos + 2])
                         attrs[attributes.get(code).get('field')] = str(translate.get(attributes.get(code).get('type'))(data_2[pos + 2:pos + length]))
@@ -115,13 +117,16 @@ def upload_data():
                     result_list.append({ mandatory_field: attrs[mandatory_field]  for mandatory_field in mandatory_fields if (mandatory_field in attrs.keys())})
                     result_df = pd.DataFrame(result_list)
                     result_df.insert(loc=0, column='id', value=str(uuid.uuid4()))
-                    logging.info(result_df+"result_df")
+                    logging.info("result_df/n")
+                    logging.info(result_df)
                     base_df = base_df.merge(result_df, how = 'outer')[mandatory_fields]
-                     logging.info(base_df,"basedf")
+                     logging.info("basedf/n")
+                     logging.info(base_df)
                     if (len(data) > 1):
                         os.remove(full_path_file)
                         logging.warning("se elimino data")
                 except Exception as e:
+                    logging.Error("no pudo abrir")
                     print(e)
                     print(traceback.format_exc())
                     continue
@@ -132,8 +137,11 @@ def upload_data():
                 container = database.get_container_client(container_name)
                 base_df = base_df.astype(str)
                 [container.upsert_item(body_dict) for body_dict in base_df.to_dict(orient="records")]
-                logging.warning("base_df nuevamente",base_df)
+                logging.warning("base_df nuevamente/n")
+                logging.warning(base_df)
+
         except Exception as e:
+            logging.Error("no existe")
             print(e)
             print(traceback.format_exc())
             continue
