@@ -31,7 +31,6 @@ spec:
               cpu: 40m
               memory: 51m
           terminationMessagePath: /dev/termination-log
-          name: aprodcazamasivos
           ports:
             - containerPort: 1887
               protocol: UDP
