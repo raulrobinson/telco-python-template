@@ -201,7 +201,7 @@ download = mp.Process(target=download_data)
 download.start()
 logging.info("escuchando download")
 time.sleep(7200)
-
+'''
 cleaner = mp.Process(target=clean_base)
 cleaner.start()
-logging.info("escuchando clean")
+logging.info("escuchando clean")'''
