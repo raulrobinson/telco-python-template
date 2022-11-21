@@ -1,81 +1,288 @@
+kind: Pod
 apiVersion: v1
-kind: Template
 metadata:
-  name: aprodcazamasivos
+  generateName: aprodcazamasivos # name
   annotations:
-    description: "Template para generacion del servicio de aprodcazamasivos para Telefonica"
-    iconClass: "icon-rh-integration"
-objects:
-  - apiVersion: apps.openshift.io/v1
-    kind: DeploymentConfig
-    metadata:
-      labels:
-        app: aprodcazamasivos
-        app.kubernetes.io/component: aprodcazamasivos
-        app.kubernetes.io/instance: aprodcazamasivos
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.131.15.55"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.131.15.55"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/scc: anyuid
+  resourceVersion: '1636693884'
+  name: aprodcazamasivos # name
+  uid: 2a69dbe2-7afe-42e9-9f98-ff0fab1597c2
+  creationTimestamp: '2022-11-21T17:54:14Z'
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-21T17:54:14Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:openshift.io/generated-by': {}
+          'f:generateName': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:deploymentconfig': {}
+            'f:pod-template-hash': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"58ba39c0-9ee9-4e7e-a510-5cd20e632e9b"}':
+              .: {}
+              'f:apiVersion': {}
+              'f:blockOwnerDeletion': {}
+              'f:controller': {}
+              'f:kind': {}
+              'f:name': {}
+              'f:uid': {}
+        'f:spec':
+          'f:containers':
+            'k:{"name":"aprodcazamasivos"}':
+              'f:envFrom': {}
+              'f:image': {}
+              'f:terminationMessagePolicy': {}
+              .: {}
+              'f:resources':
+                .: {}
+                'f:limits':
+                  .: {}
+                  'f:memory': {}
+                'f:requests':
+                  .: {}
+                  'f:cpu': {}
+                  'f:memory': {}
+              'f:env':
+                .: {}
+                'k:{"name":"TZ"}':
+                  .: {}
+                  'f:name': {}
+                  'f:value': {}
+              'f:terminationMessagePath': {}
+              'f:imagePullPolicy': {}
+              'f:ports':
+                .: {}
+                'k:{"containerPort":1887,"protocol":"UDP"}':
+                  .: {}
+                  'f:containerPort': {}
+                  'f:protocol': {}
+              'f:name': {}
+          'f:dnsPolicy': {}
+          'f:enableServiceLinks': {}
+          'f:hostAliases':
+            .: {}
+            'k:{"ip":"10.86.6.26"}':
+              .: {}
+              'f:hostnames': {}
+              'f:ip': {}
+          'f:restartPolicy': {}
+          'f:schedulerName': {}
+          'f:securityContext':
+            .: {}
+            'f:runAsNonRoot': {}
+          'f:terminationGracePeriodSeconds': {}
+    - manager: multus
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-21T17:54:17Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:k8s.v1.cni.cncf.io/network-status': {}
+            'f:k8s.v1.cni.cncf.io/networks-status': {}
+    - manager: kubelet
+      operation: Update
+      apiVersion: v1
+      time: '2022-11-21T17:54:19Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:conditions':
+            'k:{"type":"ContainersReady"}':
+              .: {}
+              'f:lastProbeTime': {}
+              'f:lastTransitionTime': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Initialized"}':
+              .: {}
+              'f:lastProbeTime': {}
+              'f:lastTransitionTime': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Ready"}':
+              .: {}
+              'f:lastProbeTime': {}
+              'f:lastTransitionTime': {}
+              'f:status': {}
+              'f:type': {}
+          'f:containerStatuses': {}
+          'f:hostIP': {}
+          'f:phase': {}
+          'f:podIP': {}
+          'f:podIPs':
+            .: {}
+            'k:{"ip":"10.131.15.55"}':
+              .: {}
+              'f:ip': {}
+          'f:startTime': {}
+  namespace: cazamasivos # namespace
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: aprodcazamasivos-5b8759b457 # name
+      uid: 58ba39c0-9ee9-4e7e-a510-5cd20e632e9b
+      controller: true
+      blockOwnerDeletion: true
+  labels:
+    app: aprodcazamasivos
+    deploymentconfig: aprodcazamasivos
+    pod-template-hash: 5b8759b457
+spec:
+  restartPolicy: Always
+  serviceAccountName: default
+  imagePullSecrets:
+    - name: default-dockercfg-j5qr8
+    - name: registry
+  priority: 0
+  schedulerName: default-scheduler
+  enableServiceLinks: true
+  terminationGracePeriodSeconds: 30
+  preemptionPolicy: PreemptLowerPriority
+  nodeName: aprodocp1-vnv82-infra-eastus1-jqtbq
+  securityContext:
+    seLinuxOptions:
+      level: 's0:c27,c24'
+    runAsNonRoot: false
+  containers:
+    - resources:
+        limits:
+          memory: 4Gi
+        requests:
+          cpu: 40m
+          memory: 51m
+      terminationMessagePath: /dev/termination-log
       name: aprodcazamasivos
-      namespace: cazamasivos
-    spec:
-      replicas: 1
-      revisionHistoryLimit: 10
-      selector:
-        app: aprodcazamasivos
-        deploymentconfig: aprodcazamasivos
-      strategy:
-        activeDeadlineSeconds: 21600
-        resources: { }
-        rollingParams:
-          intervalSeconds: 1
-          maxSurge: 25%
-          maxUnavailable: 25%
-          timeoutSeconds: 600
-          updatePeriodSeconds: 1
-        type: Rolling
-      template:
-        metadata:
-          annotations:
-            openshift.io/generated-by: OpenShiftNewApp
-            sidecar.istio.io/inject: "true"
-          labels:
-            app: aprodcazamasivos
-            deploymentconfig: aprodcazamasivos
-        spec:
-          containers:
-            - name: aprodcazamasivos
-              env:
-                - name: SPRING_APPLICATION_JSON
-                  value: '{"server":{"undertow":{"io-threads":10, "worker-threads":80 }}}'
-                - name: JAVA_OPTIONS
-                  value: -Xms640m -Xmx1024m -Dfile.encoding=ISO-8859-1
-              image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
-              imagePullPolicy: Always
-              resources:
-                limits:
-                  cpu: 400m
-                  memory: 1Gi
-                requests:
-                  cpu: 200m
-                  memory: 640Mi
-          dnsPolicy: ClusterFirst
-          restartPolicy: Always
-          schedulerName: default-scheduler
-          securityContext: { }
-          terminationGracePeriodSeconds: 30
-          runAsNonRoot: false
-          hostAliases:
-            - ip: 10.86.6.26
-              hostnames:
-                - aprodcazamasivosdb.documents.azure.com       
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      labels:
-        app: aprodcazamasivos
-        app.kubernetes.io/component: aprodcazamasivos
-        app.kubernetes.io/instance: aprodcazamasivos
-      name: aprodcazamasivos
-      namespace: cazamasivos
-    spec:
+      env:
+        - name: TZ
+          value: UTC+5
+      securityContext:
+        capabilities:
+          drop:
+            - MKNOD
       ports:
-        - port: 1887
+        - containerPort: 1887
           protocol: UDP
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: kube-api-access-j67nl
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePolicy: File
+      envFrom:
+        - secretRef:
+            name: registry
+        - secretRef:
+            name: aproddevopsrc.azurecr.io
+      image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
+  hostAliases:
+    - ip: 10.86.6.26
+      hostnames:
+        - aprodcazamasivosdb.documents.azure.com
+  serviceAccount: default
+  volumes:
+    - name: kube-api-access-j67nl
+      projected:
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+                - key: ca.crt
+                  path: ca.crt
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+          - configMap:
+              name: openshift-service-ca.crt
+              items:
+                - key: service-ca.crt
+                  path: service-ca.crt
+        defaultMode: 420
+  dnsPolicy: ClusterFirst
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/memory-pressure
+      operator: Exists
+      effect: NoSchedule
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-21T17:54:14Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-21T17:54:19Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-21T17:54:19Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-11-21T17:54:14Z'
+  hostIP: 10.86.13.5
+  podIP: 10.131.15.55
+  podIPs:
+    - ip: 10.131.15.55
+  startTime: '2022-11-21T17:54:14Z'
+  containerStatuses:
+    - restartCount: 0
+      started: true
+      ready: true
+      name: aprodcazamasivos
+      state:
+        running:
+          startedAt: '2022-11-21T17:54:19Z'
+      imageID: >-
+        aproddevopsrc.azurecr.io/aprodcazamasivos@sha256:0ef80adfd69d988eb5ec876237339d08855dd6d239ea18b65fd28e8ecf72a3a3
+      image: 'aproddevopsrc.azurecr.io/aprodcazamasivos:1.0'
+      lastState: {}
+      containerID: 'cri-o://c40849b77dadbadaa0eb5948315d43e52535a73e7448f63a068ae21bc5630019'
+  qosClass: Burstable

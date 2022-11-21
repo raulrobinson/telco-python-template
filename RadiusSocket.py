@@ -172,14 +172,11 @@ def check_if_container_exists(containers):
          logging.info("no existe contenedor")
     return xa
 
-
-
 def create_container(database):
     if (not check_if_container_exists(database.list_containers())):
         partition_key = PartitionKey(path='/id', kind='Hash')
         database.create_container(id=container_name, partition_key=partition_key)
         logging.warning("se crea contenedor")
-
 
 upload = mp.Process(target=upload_data)
 upload.start()
