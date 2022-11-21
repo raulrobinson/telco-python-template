@@ -52,7 +52,7 @@ mandatory_fields = [
     'NAS-Port-Type',
     'NAS-Port-Id'
 ]
-logging.basicConfig(filename='apapa.log',level='DEBUG')
+logging.basicConfig(filename='app.log',level='DEBUG')
 
 def socket_connect():
     status = False
@@ -147,24 +147,31 @@ def upload_data():
             continue
 
 
-def clean_base():
+'''def clean_base():
     while True:
         database = get_cosmos_database()
         database.delete_container(container_name)
         logging.warning("se elimino contenedor")
         create_container(database)
-        time.sleep(7200)
+        time.sleep(7200)'''
 
 
 def get_cosmos_database():
     client = CosmosClient(cosmos_url, credential=cosmos_key)
     logging.info("conexion base de datos")
-    return client.get_database_client(database_name)
-
+    x=client.get_database_client(database_name)
+    logging.info("inicia procedimientos base de datos",x)
+    return x
 
 def check_if_container_exists(containers):
     logging.info("revisa si hay contenedor")
-    return any([True if (container.get('id') == container_name) else False for container in containers])
+    xa=any([True if (container.get('id') == container_name) else False for container in containers])
+    if(xa==True):
+        logging.info("existe contenedor")
+    else:
+         logging.info("no existe contenedor")
+    return xa
+
 
 
 def create_container(database):
