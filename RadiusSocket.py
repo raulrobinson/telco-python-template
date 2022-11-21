@@ -120,8 +120,8 @@ def upload_data():
                     logging.info("result_df/n")
                     logging.info(result_df)
                     base_df = base_df.merge(result_df, how = 'outer')[mandatory_fields]
-                     logging.info("basedf/n")
-                     logging.info(base_df)
+                    logging.info("basedf/n")
+                    logging.info(base_df)
                     if (len(data) > 1):
                         os.remove(full_path_file)
                         logging.warning("se elimino data")
