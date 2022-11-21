@@ -52,7 +52,7 @@ mandatory_fields = [
     'NAS-Port-Type',
     'NAS-Port-Id'
 ]
-
+logging.basicConfig(filename='apapa.log',level='DEBUG')
 
 def socket_connect():
     status = False
